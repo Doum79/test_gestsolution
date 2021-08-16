@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:test_gestsolution/Connexion/register.dart';
 import 'package:test_gestsolution/home.dart';
@@ -26,12 +27,26 @@ class _LoginState extends State<Login> {
       response.body,
     );
     if (data == "Success") {
+      Fluttertoast.showToast(
+          msg: "Connexion effectuer!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0);
+
       Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
     } else {
       if (data == "Error") {
-        setState(() {
-          msg = "Login Failed";
-        });
+        Fluttertoast.showToast(
+            msg: "Echec de connection !",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       }
     }
   }
